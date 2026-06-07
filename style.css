@@ -1,0 +1,311 @@
+/* Custom properties for easy theme management */
+:root {
+    --bg-color: #0a0e14;
+    --panel-bg: #101520;
+    --border-color: #233044;
+    
+    /* Neon accents */
+    --text-primary: #52ffb8;    /* Classic Terminal Green */
+    --text-muted: #647b99;
+    --accent-gold: #ffd166;     /* Solstice Sunlight Gold */
+    --accent-alert: #ff5c5c;
+    
+    --font-mono: 'Courier New', Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* CRT Scanline Effect Overlay */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 999;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+}
+
+/* Main Wrapper layout */
+.game-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header UI Component */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed var(--border-color);
+    padding-bottom: 15px;
+}
+
+.title-group h1 {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px var(--text-primary);
+}
+
+.version-tag {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.status-panel {
+    display: flex;
+    gap: 24px;
+    font-weight: bold;
+}
+
+.highlight { color: var(--accent-gold); text-shadow: 0 0 8px var(--accent-gold); }
+.highlight-alt { color: #00bfff; text-shadow: 0 0 8px #00bfff; }
+
+/* Workspace Split Layout */
+.workspace {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    height: calc(100% - 80px);
+}
+
+/* Common Panel Styling */
+.panel {
+    flex: 1;
+    background-color: var(--panel-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-header {
+    background-color: rgba(35, 48, 68, 0.4);
+    padding: 10px 15px;
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--border-color);
+    letter-spacing: 1px;
+}
+
+/* LEFT PANEL: Interactive Grid Core */
+.puzzle-panel {
+    flex: 1.2; /* Slightly wider than the terminal */
+}
+
+.puzzle-grid-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+/* Responsive 3x3 Grid Matrix layout */
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 15px;
+}
+
+.tile {
+    background-color: rgba(10, 14, 20, 0.8);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.tile:hover {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 10px rgba(82, 255, 184, 0.2);
+}
+
+.tile.active {
+    color: var(--bg-color);
+    background-color: var(--text-primary);
+    border-color: var(--text-primary);
+    box-shadow: 0 0 15px var(--text-primary);
+}
+
+.tile.gate {
+    color: var(--accent-gold);
+    border-color: rgba(255, 209, 102, 0.4);
+    font-size: 1.1rem;
+}
+
+/* Button mechanics */
+.panel-actions {
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.btn {
+    font-family: var(--font-mono);
+    padding: 12px 20px;
+    border: 2px solid;
+    background: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px var(--text-primary);
+}
+
+.btn-secondary {
+    color: var(--text-muted);
+    border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+    color: white;
+    border-color: white;
+}
+
+/* RIGHT PANEL: Terminal UI */
+.terminal-panel {
+    flex: 0.8;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.system-msg {
+    color: var(--text-muted);
+}
+
+.terminal-divider {
+    border: 0;
+    border-top: 1px dashed var(--border-color);
+    margin: 10px 0;
+}
+
+.ai-output {
+    background-color: rgba(255, 209, 102, 0.04);
+    border-left: 3px solid var(--accent-gold);
+    padding: 12px;
+}
+
+.ai-prompt {
+    color: var(--accent-gold);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.terminal-footer {
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color);
+}
+
+.blink-cursor {
+    animation: blink 1s steps(2, start) infinite;
+    color: var(--text-primary);
+}
+
+/* Help Button styling */
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0 8px;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.btn-icon:hover {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 8px var(--accent-gold);
+}
+
+/* Modal Pop-up Layout Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(10, 14, 20, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-content {
+    background-color: var(--panel-bg);
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 20px rgba(255, 209, 102, 0.2);
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    line-height: 1.5;
+}
+.modal-content h3 {
+    color: var(--accent-gold);
+}
+.modal-content code {
+    background-color: var(--bg-color);
+    padding: 2px 6px;
+    color: white;
+}
+
+@keyframes blink { to { visibility: hidden; } }
