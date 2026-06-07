@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Turing Dial: Solstice Protocol</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <main class="game-container">
+        
+        <header class="game-header">
+            <div class="title-group">
+                <h1>THE TURING DIAL</h1>
+                <span class="version-tag">v1.0.0-SOLSTICE</span>
+            </div>
+            <div class="status-panel">
+                <div class="status-item">TIME: <span id="clock-display" class="highlight">12:00 PM</span></div>
+                <div class="status-item">LOGIC LAYER: <span id="logic-display" class="highlight-alt">BOOLEAN</span></div>
+                <div class="status-item">SCORE: <span id="score-display" style="color: #ff5c5c; text-shadow: 0 0 8px #ff5c5c;">0000</span></div>
+                <button id="btn-help" class="btn-icon" title="View Manual">❓</button>
+            </div>
+        </header>
+
+        <div class="workspace">
+            
+            <section class="panel puzzle-panel">
+                <div class="panel-header">__// COMPUTATION_MATRIX</div>
+                <div class="puzzle-grid-wrapper">
+                    <div class="puzzle-grid" id="grid">
+                        <div class="tile active">1</div>
+                        <div class="tile">0</div>
+                        <div class="tile gate">AND</div>
+                        <div class="tile active">1</div>
+                        <div class="tile">0</div>
+                        <div class="tile gate">NOT</div>
+                        <div class="tile">0</div>
+                        <div class="tile active">1</div>
+                        <div class="tile gate">OR</div>
+                    </div>
+                </div>
+                <div class="panel-actions">
+                    <button class="btn btn-primary" id="btn-process">EXECUTE SEQUENCE</button>
+                    <button class="btn btn-secondary" id="btn-reset">RESET TAPE</button>
+                </div>
+            </section>
+
+            <section class="panel terminal-panel">
+                <div class="panel-header">__// GEMINI_COGNITION_FEED</div>
+                <div class="terminal-body" id="terminal-log">
+                    <p class="system-msg">[SYSTEM]: Connection to Google AI Studio established successfully.</p>
+                    <p class="system-msg">[SYSTEM]: Current sun angle at peak (High Noon). Standard logic paths open.</p>
+                    <hr class="terminal-divider">
+                    <div class="ai-output">
+                        <span class="ai-prompt">&gt; HISTORICAL CONTEXT DECRYPTED:</span>
+                        <p id="ai-context-text">"We can only see a short distance ahead, but we can see plenty there that needs to be done." — Alan Turing</p>
+                    </div>
+                </div>
+                <div class="terminal-footer">
+                    <span class="blink-cursor">■</span> INPUT BLOCKED // RESPOND VIA MATRIX
+                </div>
+            </section>
+
+        </div>
+         <div id="guide-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>__// THE TURING DIAL: DECRYPTION MANUAL</h3>
+            <hr class="terminal-divider">
+            <p><strong>1. READ COGNITION FEED:</strong> Read the <code>[DECRYPT TARGET]</code> condition supplied in real-time by the Gemini AI Model layer.</p>
+            <p><strong>2. MANIPULATE THE MATRIX:</strong> Toggle code nodes on your left matrix grid. Click them to invert their states from inactive to active (neon glow).</p>
+            <p><strong>3. PASS SYSTEM PHASES:</strong> As the clock cycles automatically, logic states degrade from <em>Sunrise Unary</em> to <em>Noon Boolean</em>, down to hard cryptography at <em>Midnight Enigma</em>.</p>
+            <p><strong>4. COMPILE:</strong> Click <code>EXECUTE SEQUENCE</code> to test your solution framework against active node arrays.</p>
+            <button id="btn-close-guide" class="btn btn-primary" style="margin-top: 15px; width: 100%;">CLOSE ENVELOPE</button>
+        </div>
+    </div>
+    </main>
+   
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://esm.run/@google/genai"
+      }
+    }
+    </script>
+
+    <script src="game.js" type="module"></script>
+</body>
+</html>
